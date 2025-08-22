@@ -1,0 +1,70 @@
+# --------------------------------------
+# Node.js
+# --------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Optional: keep only if you don’t want lock files in git
+# (If your team wants reproducible builds, remove these lines)
+
+# --------------------------------------
+# Environment files
+# --------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# --------------------------------------
+# Logs
+# --------------------------------------
+logs
+*.log
+*.out
+*.pid
+*.gz
+*.seed
+
+# --------------------------------------
+# Build output
+# --------------------------------------
+dist/
+build/
+.cache/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# --------------------------------------
+# System / OS files
+# --------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# --------------------------------------
+# IDE / Editor files
+# --------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# --------------------------------------
+# React Native / Expo (if ever used)
+# --------------------------------------
+.expo/
+.expo-shared/
