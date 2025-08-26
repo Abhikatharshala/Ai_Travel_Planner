@@ -1,19 +1,20 @@
 const express = require("express");
 const cors=require("cors")
-const mongoose = require("mongoose");  
+ 
+const mongoDb=require("./config/connect")
 require("dotenv").config();
 const authRoutes=require("./Routes/auth")
 const tripRoutes=require("./Routes/trip")
 const ItineraryRoutes=require("./Routes/Itinerary")
 const router=require("./Routes/openAi")
 const googlePlaceRouter=require("./Routes/googlePlace")
+const wishlistRoute=require("./Routes/wishList")
+const historyRoute=require("./Routes/history")
 
 
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB is connecteng"))
-  .catch((err) => console.log("Not connected to MongoDB:", err));
+mongoDb()
 
 
 
@@ -39,10 +40,20 @@ app.use("/openAI",router)
 //GooglePlacesApi
 app.use("/googlePlace",googlePlaceRouter)
 
+
+//wishListRoutes
+app.use("/wishList",wishlistRoute)
+
+//history route
+app.use("/history",historyRoute)
+
+
 // Testing route
 app.get("/test", (req, res) => {
   res.json({ message: "Postman test working!" });
 });
+
+
 
 
 // Start server

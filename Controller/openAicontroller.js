@@ -8,7 +8,7 @@ const createItinerary = async (req, res) => {
 
     if (!location || !days || !startDate || !endDate) {
       return res.status(401).json({
-        message: "destination, startDate, endDate, and days are required"
+        message: "destination, startDate, endDate, and days are required",
       });
     }
 
@@ -42,15 +42,13 @@ The response should be a single JSON object ONLY, with this exact structure:
     // 2️Generate itinerary from OpenAI
     const itineraryText = await generateItinerary(prompt);
 
-
     let textItinerary = itineraryText
       .replace(/```json/g, "")
       .replace(/```/g, "")
       .trim();
 
- 
     try {
-      textItinerary = JSON.parse(textItinerary); // ✅ store as object
+      textItinerary = JSON.parse(textItinerary);
     } catch (err) {
       console.error(
         "❌ Failed to parse AI response:",
@@ -81,11 +79,10 @@ The response should be a single JSON object ONLY, with this exact structure:
       trip: newTrip.itinerary,
     });
   } catch (error) {
-    console.error("❌ Error generating itinerary:", error);
+    console.error("Error generating itinerary:", error);
     res.status(500).json({ message: "Error generating itinerary", error });
   }
 };
-
 
 const getTrips = async (req, res) => {
   try {
@@ -96,15 +93,15 @@ const getTrips = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      trips: trips
+      trips: trips,
     });
   } catch (error) {
-    console.error("❌ Error fetching trips:", error);
+    console.error("Error fetching trips:", error);
     res.status(500).json({ message: "Error while getting trips", error });
   }
 };
 
-const getTripById=async(req,res)=>{
+const getTripById = async (req, res) => {
   try {
     const tripId = req.params.id;
 
@@ -118,24 +115,20 @@ const getTripById=async(req,res)=>{
 
     res.status(200).json({ success: true, trip });
   } catch (error) {
-    console.error("❌ Error fetching trip:", error);
+    console.error("Error fetching trip:", error);
     res.status(500).json({ message: "Error while getting trip", error });
   }
 };
 
-const deleteTrip=async(req,res)=>{
-try {
-    const delId=req.params.id
-  const tripDel= await Trip.findByIdAndDelete({_id:delId})
-  res.status(201).json({message:"Trip is Deleted Sucessfully"})
-} catch (error) {
-  console.log(error,"erors")
-  res.status(400).json({message:"trip is not deleted due to error"})
-}
+const deleteTrip = async (req, res) => {
+  try {
+    const delId = req.params.id;
+    const tripDel = await Trip.findByIdAndDelete({ _id: delId });
+    res.status(201).json({ message: "Trip is Deleted Sucessfully" });
+  } catch (error) {
+    console.log(error, "erors");
+    res.status(400).json({ message: "trip is not deleted due to error" });
+  }
+};
 
-
-}
-
-
-module.exports = {createItinerary,getTrips,getTripById,deleteTrip};
-
+module.exports = { createItinerary, getTrips, getTripById, deleteTrip };
